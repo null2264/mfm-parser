@@ -1,6 +1,12 @@
 defmodule MfmParser.Lexer do
   alias MfmParser.Reader
 
+  alias MfmParser.Token
+  alias MfmParser.Token.MFMOpen
+  alias MfmParser.Token.MFMClose
+  alias MfmParser.Token.Newline
+  alias MfmParser.Token.Text
+
   def peek(input) do
     case next(input) do
       {:ok, token, _} -> {:ok, token}
@@ -9,49 +15,49 @@ defmodule MfmParser.Lexer do
   end
 
   def next(input) do
-    recursive_next(Reader.next(input), "", type_of_token(input))
+    recursive_extract_next_token(Reader.next(input), get_empty_token(input))
   end
 
-  defp recursive_next(:eof, _, _) do
+  defp recursive_extract_next_token(:eof, _) do
     :eof
   end
 
-  defp recursive_next({:ok, char, rest}, part, token_type) do
-    if is_end_of_token?(char, rest, token_type) do
-      {:ok, part <> char, rest}
+  defp recursive_extract_next_token({:ok, char, rest}, token) do
+    if is_last_char_of_token?(char, rest, token) do
+      {:ok, token |> Token.append(char), rest}
     else
-      recursive_next(Reader.next(rest), part <> char, token_type)
+      recursive_extract_next_token(Reader.next(rest), token |> Token.append(char))
     end
   end
 
-  defp is_end_of_token?(char, _, :mfm_open) do
-    char in [" "]
+  defp get_empty_token(input) do
+    case Reader.peek(input) do
+      :eof -> :eof
+      {:ok, "$"} -> %MFMOpen{}
+      {:ok, "]"} -> %MFMClose{}
+      {:ok, "\n"} -> %Newline{}
+      _ -> %Text{}
+    end
   end
 
-  defp is_end_of_token?(_, _, :mfm_close) do
+  defp is_last_char_of_token?(char, _, %MFMOpen{}) do
+    char == " "
+  end
+
+  defp is_last_char_of_token?(_, _, %MFMClose{}) do
     true
   end
 
-  defp is_end_of_token?(_, _, :newline) do
+  defp is_last_char_of_token?(_, _, %Newline{}) do
     true
   end
 
-  defp is_end_of_token?(_, rest, :text) do
+  defp is_last_char_of_token?(_, rest, %Text{}) do
     case Reader.next(rest) do
       :eof -> true
       {:ok, "]", _} -> true
       {:ok, "$", new_rest} -> Reader.peek(new_rest) == {:ok, "["}
       _ -> false
-    end
-  end
-
-  defp type_of_token(input) do
-    case Reader.peek(input) do
-      :eof -> :eof
-      {:ok, "$"} -> :mfm_open
-      {:ok, "]"} -> :mfm_close
-      {:ok, "\n"} -> :newline
-      _ -> :text
     end
   end
 end
