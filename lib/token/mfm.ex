@@ -1,7 +1,7 @@
 defmodule MfmParser.Token.MFM do
   def to_props(opts_string) when is_binary(opts_string) do
     if opts_string =~ "." do
-      Regex.replace(~r/^.*\./u, opts_string, "")
+      Regex.replace(~r/^.*?\./u, opts_string, "")
       |> String.trim()
       |> String.split(",")
       |> Enum.reduce(%{}, fn opt, acc ->

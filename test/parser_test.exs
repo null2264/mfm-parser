@@ -420,12 +420,12 @@ defmodule MfmParser.ParserTest do
         }
       ]
 
-      input_speed = "$[twitch.speed=20s ]"
+      input_speed = "$[twitch.speed=0.2s ]"
 
       output_speed = [
         %MfmParser.Node.MFM.Twitch{
           props: %{
-            speed: "20s"
+            speed: "0.2s"
           },
           children: []
         }

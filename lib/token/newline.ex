@@ -1,3 +1,3 @@
 defmodule MfmParser.Token.Newline do
-   defstruct content: ""
+  defstruct content: ""
 end

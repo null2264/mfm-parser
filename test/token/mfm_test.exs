@@ -5,6 +5,7 @@ defmodule MfmParser.MFMTest do
 
   test "it returns speed in the list of parameters" do
     assert %{speed: "5s"} = MFM.to_props("$[blabla.speed=5s")
+    assert %{speed: "0.5s"} = MFM.to_props("$[blabla.speed=0.5s")
   end
 
   test "it returns v and h in the list of parameters" do

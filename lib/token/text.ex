@@ -1,3 +1,3 @@
 defmodule MfmParser.Token.Text do
-   defstruct content: ""
+  defstruct content: ""
 end

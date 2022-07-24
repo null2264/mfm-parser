@@ -1,3 +1,3 @@
 defmodule MfmParser.Node.MFM.Rotate do
-  defstruct  props: %{}, children: []
+  defstruct props: %{}, children: []
 end
