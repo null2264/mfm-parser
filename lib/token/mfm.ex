@@ -1,45 +1,46 @@
 defmodule MfmParser.Token.MFM do
   def to_props(opts_string) when is_binary(opts_string) do
-    if opts_string =~ "." do
-      Regex.replace(~r/^.*?\./u, opts_string, "")
-      |> String.trim()
-      |> String.split(",")
-      |> Enum.reduce(%{}, fn opt, acc ->
-        acc
-        |> Map.merge(
-          cond do
-            opt =~ "speed" ->
-              %{speed: String.replace(opt, "speed=", "")}
+    cond do
+      opts_string =~ "." ->
+        Regex.replace(~r/^.*?\./u, opts_string, "")
+        |> String.trim()
+        |> String.split(",")
+        |> Enum.reduce(%{}, fn opt, acc ->
+          acc
+          |> Map.merge(
+            cond do
+              opt =~ "speed" ->
+                %{speed: String.replace(opt, "speed=", "")}
 
-            opt =~ "v" ->
-              %{v: true}
+              opt =~ "v" ->
+                %{v: true}
 
-            opt =~ "h" ->
-              %{h: true}
+              opt =~ "h" ->
+                %{h: true}
 
-            opt =~ "x" ->
-              %{keyframes_name: "mfm-spinX"}
+              opt =~ "x" ->
+                %{axis: "x"}
 
-            opt =~ "y" ->
-              %{keyframes_name: "mfm-spinY"}
+              opt =~ "y" ->
+                %{axis: "y"}
 
-            opt =~ "left" ->
-              %{direction: "reverse"}
+              opt =~ "left" ->
+                %{direction: "left"}
 
-            opt =~ "alternate" ->
-              %{direction: "alternate"}
+              opt =~ "alternate" ->
+                %{direction: "alternate"}
 
-            true ->
-              if Regex.match?(~r/^\$\[font/, opts_string) do
-                %{font: opt}
-              else
-                %{}
-              end
-          end
-        )
-      end)
-    else
-      if opts_string =~ "$[x" do
+              true ->
+                if Regex.match?(~r/^\$\[font/, opts_string) do
+                  %{font: opt}
+                else
+                  %{}
+                end
+            end
+          )
+        end)
+
+      opts_string =~ "$[x" ->
         %{
           size:
             case opts_string |> String.replace("$[x", "") |> String.trim() do
@@ -49,9 +50,9 @@ defmodule MfmParser.Token.MFM do
               _ -> "100%"
             end
         }
-      else
+
+      true ->
         %{}
-      end
     end
   end
 end

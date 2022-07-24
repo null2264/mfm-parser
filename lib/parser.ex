@@ -63,22 +63,23 @@ defmodule MfmParser.Parser do
 
   defp get_node(token = %{content: content}) do
     cond do
-      content =~ "$[flip" -> %Node.MFM.Flip{} |> fill_props(token)
-      content =~ "$[font" -> %Node.MFM.Font{} |> fill_props(token)
-      content =~ "$[x" -> %Node.MFM.X{} |> fill_props(token)
-      content =~ "$[blur" -> %Node.MFM.Blur{} |> fill_props(token)
-      content =~ "$[jelly" -> %Node.MFM.Jelly{} |> fill_props(token)
-      content =~ "$[tada" -> %Node.MFM.Tada{} |> fill_props(token)
-      content =~ "$[jump" -> %Node.MFM.Jump{} |> fill_props(token)
-      content =~ "$[bounce" -> %Node.MFM.Bounce{} |> fill_props(token)
-      content =~ "$[spin" -> %Node.MFM.Spin{} |> fill_props(token)
-      content =~ "$[shake" -> %Node.MFM.Shake{} |> fill_props(token)
-      content =~ "$[twitch" -> %Node.MFM.Twitch{} |> fill_props(token)
-      content =~ "$[rainbow" -> %Node.MFM.Rainbow{} |> fill_props(token)
-      content =~ "$[sparkle" -> %Node.MFM.Sparkle{} |> fill_props(token)
-      content =~ "$[rotate" -> %Node.MFM.Rotate{} |> fill_props(token)
-      true -> %Node.MFM.Undefined{} |> fill_props(token)
+      content =~ "$[flip" -> %Node.MFM.Flip{}
+      content =~ "$[font" -> %Node.MFM.Font{}
+      content =~ "$[x" -> %Node.MFM.X{}
+      content =~ "$[blur" -> %Node.MFM.Blur{}
+      content =~ "$[jelly" -> %Node.MFM.Jelly{}
+      content =~ "$[tada" -> %Node.MFM.Tada{}
+      content =~ "$[jump" -> %Node.MFM.Jump{}
+      content =~ "$[bounce" -> %Node.MFM.Bounce{}
+      content =~ "$[spin" -> %Node.MFM.Spin{}
+      content =~ "$[shake" -> %Node.MFM.Shake{}
+      content =~ "$[twitch" -> %Node.MFM.Twitch{}
+      content =~ "$[rainbow" -> %Node.MFM.Rainbow{}
+      content =~ "$[sparkle" -> %Node.MFM.Sparkle{}
+      content =~ "$[rotate" -> %Node.MFM.Rotate{}
+      true -> %Node.MFM.Undefined{}
     end
+    |> fill_props(token)
   end
 
   defp fill_props(node = %{props: props}, %{content: content}) do
