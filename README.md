@@ -27,7 +27,6 @@ The Parser returns a tree, which looks like
       }
     ]
 
-
 You can also convert the tree into HTML.
 
 ## Examples
