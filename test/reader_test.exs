@@ -3,11 +3,11 @@ defmodule MfmParser.ReaderTest do
   alias MfmParser.Reader
 
   test "it can peek at the next character" do
-    assert Reader.peek("chocolatine") == {:ok, "c"}
+    assert Reader.peek("chocolatine") == "c"
   end
 
   test "it step to the next character" do
-    assert Reader.next("chocolatine") == {:ok, "c", "hocolatine"}
+    assert Reader.next("chocolatine") == {"c", "hocolatine"}
   end
 
   test "it returns eof" do

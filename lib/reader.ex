@@ -4,7 +4,7 @@ defmodule MfmParser.Reader do
 
     case next_char do
       nil -> :eof
-      _ -> {:ok, next_char}
+      _ -> next_char
     end
   end
 
@@ -13,7 +13,7 @@ defmodule MfmParser.Reader do
 
     case next_char do
       "" -> :eof
-      _ -> {:ok, next_char, rest}
+      _ -> {next_char, rest}
     end
   end
 end

@@ -2,14 +2,13 @@ defmodule MfmParser.Lexer do
   alias MfmParser.Reader
 
   alias MfmParser.Token
-  alias MfmParser.Token.MFMOpen
-  alias MfmParser.Token.MFMClose
+  alias MfmParser.Token.MFM
   alias MfmParser.Token.Newline
   alias MfmParser.Token.Text
 
   def peek(input) do
     case next(input) do
-      {:ok, token, _} -> {:ok, token}
+      {token, _} -> token
       :eof -> :eof
     end
   end
@@ -22,9 +21,9 @@ defmodule MfmParser.Lexer do
     :eof
   end
 
-  defp recursive_extract_next_token({:ok, char, rest}, token) do
+  defp recursive_extract_next_token({char, rest}, token) do
     if is_last_char_of_token?(char, rest, token) do
-      {:ok, token |> Token.append(char), rest}
+      {token |> Token.append(char), rest}
     else
       recursive_extract_next_token(Reader.next(rest), token |> Token.append(char))
     end
@@ -33,18 +32,18 @@ defmodule MfmParser.Lexer do
   defp get_empty_token(input) do
     case Reader.peek(input) do
       :eof -> :eof
-      {:ok, "$"} -> %MFMOpen{}
-      {:ok, "]"} -> %MFMClose{}
-      {:ok, "\n"} -> %Newline{}
+      "$" -> %MFM.Open{}
+      "]" -> %MFM.Close{}
+      "\n" -> %Newline{}
       _ -> %Text{}
     end
   end
 
-  defp is_last_char_of_token?(char, _, %MFMOpen{}) do
+  defp is_last_char_of_token?(char, _, %MFM.Open{}) do
     char == " "
   end
 
-  defp is_last_char_of_token?(_, _, %MFMClose{}) do
+  defp is_last_char_of_token?(_, _, %MFM.Close{}) do
     true
   end
 
@@ -55,8 +54,8 @@ defmodule MfmParser.Lexer do
   defp is_last_char_of_token?(_, rest, %Text{}) do
     case Reader.next(rest) do
       :eof -> true
-      {:ok, "]", _} -> true
-      {:ok, "$", new_rest} -> Reader.peek(new_rest) == {:ok, "["}
+      {"]", _} -> true
+      {"$", new_rest} -> Reader.peek(new_rest) == "["
       _ -> false
     end
   end
