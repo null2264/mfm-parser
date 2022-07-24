@@ -31,11 +31,24 @@ defmodule MfmParser.Lexer do
 
   defp get_empty_token(input) do
     case Reader.peek(input) do
-      :eof -> :eof
-      "$" -> %MFM.Open{}
-      "]" -> %MFM.Close{}
-      "\n" -> %Newline{}
-      _ -> %Text{}
+      :eof ->
+        :eof
+
+      "$" ->
+        if Reader.peek(input, 2) == "[" do
+          %MFM.Open{}
+        else
+          %Text{}
+        end
+
+      "]" ->
+        %MFM.Close{}
+
+      "\n" ->
+        %Newline{}
+
+      _ ->
+        %Text{}
     end
   end
 

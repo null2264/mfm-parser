@@ -8,6 +8,15 @@ defmodule MfmParser.Reader do
     end
   end
 
+  def peek(input, steps) do
+    nth_char = input |> String.at(steps - 1)
+
+    case nth_char do
+      nil -> :eof
+      _ -> nth_char
+    end
+  end
+
   def next(input) do
     {next_char, rest} = String.split_at(input, 1)
 

@@ -57,6 +57,15 @@ defmodule MfmParser.LexerTest do
 
       assert Lexer.peek("Eyes like $$") == %Text{content: "Eyes like $$"}
       assert Lexer.next("Eyes like $$") == {%Text{content: "Eyes like $$"}, ""}
+
+      assert Lexer.peek("$2 chocolatine") == %Text{content: "$2 chocolatine"}
+      assert Lexer.next("$2 chocolatine") == {%Text{content: "$2 chocolatine"}, ""}
+
+      assert Lexer.peek("$2") == %Text{content: "$2"}
+      assert Lexer.next("$2") == {%Text{content: "$2"}, ""}
+
+      assert Lexer.peek("$") == %Text{content: "$"}
+      assert Lexer.next("$") == {%Text{content: "$"}, ""}
     end
 
     test "it ends when a mfm token closes" do
