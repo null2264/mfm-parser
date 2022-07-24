@@ -502,185 +502,78 @@ defmodule MfmParser.ParserTest do
     end
   end
 
-  #   test "it returns a parse tree with content" do
-  #     input = "$[twitch twitching text]"
-  # 
-  #     output = [
-  #       %MfmParser.MFM.Twitch{
-  #         props: %{
-  #           speed: "20s"
-  #         },
-  #         children: [
-  #           %MfmParser.Text{
-  #             props: %{
-  #               text: "twitching text"
-  #             }
-  #           }
-  #         ]
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
-  # 
-  #   test "it returns a parse tree with mutiple entries and contents" do
-  #     input = "look at this $[twitch twitching text]"
-  # 
-  #     output = [
-  #       %MfmParser.Text{
-  #         props: %{
-  #           text: "look at this "
-  #         }
-  #       },
-  #       %MfmParser.MFM.Twitch{
-  #         props: %{
-  #           speed: "20s"
-  #         },
-  #         children: [
-  #           %MfmParser.Text{
-  #             props: %{
-  #               text: "twitching text"
-  #             }
-  #           }
-  #         ]
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
+  describe "multiple element input" do
+    test "it can handle multiple elements as input" do
+      input = "$[twitch ]chocolatine$[blabla ]\n$[jump ]"
 
-  ######################
-  #
-  # OLD STUFF BELOW
-  #
-  ######################
-  #
+      assert Parser.parse(input) == [
+               %MfmParser.Node.MFM.Twitch{children: [], props: %{speed: "0.5s"}},
+               %MfmParser.Node.Text{props: %{text: "chocolatine"}},
+               %MfmParser.Node.MFM.Undefined{children: [], props: %{}},
+               %MfmParser.Node.Newline{props: %{text: "\n"}},
+               %MfmParser.Node.MFM.Jump{children: [], props: %{speed: "0.75s"}}
+             ]
+    end
 
-  #   test "it returns a parse tree with text" do
-  #     input = "blablabla"
-  # 
-  #     output = [
-  #       %{
-  #         type: "text",
-  #         content: "blablabla"
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
-  # 
-  #   test "it returns a parse tree with mutiple entries and contents and text" do
-  #     input = "<h1>My thought on Chocolatines</h1><div>Also known as <i>Pain au chocolat</i>.</div>"
-  # 
-  #     output = [
-  #       %{
-  #         type: "html",
-  #         name: "h1",
-  #         attributes: "",
-  #         content: [%{type: "text", content: "My thought on Chocolatines"}]
-  #       },
-  #       %{
-  #         type: "html",
-  #         name: "div",
-  #         attributes: "",
-  #         content: [
-  #           %{type: "text", content: "Also known as "},
-  #           %{
-  #             type: "html",
-  #             name: "i",
-  #             attributes: "",
-  #             content: [%{type: "text", content: "Pain au chocolat"}]
-  #           },
-  #           %{type: "text", content: "."}
-  #         ]
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
-  # 
-  #   test "it returns a parse tree with mutiple entries and contents and text and newlines" do
-  #     input =
-  #       "<h1>My thought on Chocolatines</h1><div>Also \nknown as <br><i>Pain au chocolat</i>.</div>"
-  # 
-  #     output = [
-  #       %{
-  #         type: "html",
-  #         name: "h1",
-  #         attributes: "",
-  #         content: [%{type: "text", content: "My thought on Chocolatines"}]
-  #       },
-  #       %{
-  #         type: "html",
-  #         name: "div",
-  #         attributes: "",
-  #         content: [
-  #           %{type: "text", content: "Also "},
-  #           %{type: "newline"},
-  #           %{type: "text", content: "known as "},
-  #           %{type: "newline"},
-  #           %{
-  #             type: "html",
-  #             name: "i",
-  #             attributes: "",
-  #             content: [%{type: "text", content: "Pain au chocolat"}]
-  #           },
-  #           %{type: "text", content: "."}
-  #         ]
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
-  # 
-  #   test "it returns a parse tree with mfm format $[<name_and_values> <content>]" do
-  #     input = "<div>blabla$[flip $[x2 :blobcatwitch:]]bla$[twitch.speed=20s yadayada]</div>"
-  # 
-  #     output = [
-  #       %{
-  #         type: "html",
-  #         attributes: "",
-  #         name: "div",
-  #         content: [
-  #           %{type: "text", content: "blabla"},
-  #           %{
-  #             type: "mfm",
-  #             name: "flip",
-  #             content: [
-  #               %{
-  #                 type: "mfm",
-  #                 name: "x2",
-  #                 content: [
-  #                   %{type: "text", content: ":blobcatwitch:"}
-  #                 ]
-  #               }
-  #             ]
-  #           },
-  #           %{type: "text", content: "bla"},
-  #           %{
-  #             type: "mfm",
-  #             name: "twitch.speed=20s",
-  #             content: [%{type: "text", content: "yadayada"}]
-  #           }
-  #         ]
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
-  # 
-  #   test "it understands html attributes" do
-  #     input = "<some_tag some_attribute=./something.jpeg other_atr></some_tag>"
-  # 
-  #     output = [
-  #       %{
-  #         type: "html",
-  #         name: "some_tag",
-  #         attributes: "some_attribute=./something.jpeg other_atr",
-  #         content: []
-  #       }
-  #     ]
-  # 
-  #     assert Parser.parse(input) == {:ok, output}
-  #   end
+    test "it can handle nesting" do
+      input = "$[twitch chocolatine]"
+
+      assert Parser.parse(input) == [
+               %MfmParser.Node.MFM.Twitch{
+                 children: [%MfmParser.Node.Text{props: %{text: "chocolatine"}}],
+                 props: %{speed: "0.5s"}
+               }
+             ]
+    end
+
+    test "it can handle multiple nesting" do
+      input = "$[twitch $[spin chocolatine]]"
+
+      assert Parser.parse(input) == [
+               %MfmParser.Node.MFM.Twitch{
+                 children: [
+                   %MfmParser.Node.MFM.Spin{
+                     children: [%MfmParser.Node.Text{props: %{text: "chocolatine"}}],
+                     props: %{direction: "normal", keyframes_name: "mfm-spin", speed: "1.5s"}
+                   }
+                 ],
+                 props: %{speed: "0.5s"}
+               }
+             ]
+    end
+
+    test "it can handle a complex structure of multiple elements and nesting" do
+      input =
+        "It's not $[twitch chocolatine]\nit's $[x4 $[spin pain] $[rainbow au] $[jump chocolat]]"
+
+      assert Parser.parse(input) == [
+               %MfmParser.Node.Text{props: %{text: "It's not "}},
+               %MfmParser.Node.MFM.Twitch{
+                 children: [%MfmParser.Node.Text{props: %{text: "chocolatine"}}],
+                 props: %{speed: "0.5s"}
+               },
+               %MfmParser.Node.Newline{props: %{text: "\n"}},
+               %MfmParser.Node.Text{props: %{text: "it's "}},
+               %MfmParser.Node.MFM.X{
+                 children: [
+                   %MfmParser.Node.MFM.Spin{
+                     children: [%MfmParser.Node.Text{props: %{text: "pain"}}],
+                     props: %{direction: "normal", keyframes_name: "mfm-spin", speed: "1.5s"}
+                   },
+                   %MfmParser.Node.Text{props: %{text: " "}},
+                   %MfmParser.Node.MFM.Rainbow{
+                     children: [%MfmParser.Node.Text{props: %{text: "au"}}],
+                     props: %{speed: "1s"}
+                   },
+                   %MfmParser.Node.Text{props: %{text: " "}},
+                   %MfmParser.Node.MFM.Jump{
+                     children: [%MfmParser.Node.Text{props: %{text: "chocolat"}}],
+                     props: %{speed: "0.75s"}
+                   }
+                 ],
+                 props: %{size: "600%"}
+               }
+             ]
+    end
+  end
 end
