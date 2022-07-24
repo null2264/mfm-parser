@@ -500,6 +500,16 @@ defmodule MfmParser.ParserTest do
 
       assert Parser.parse(input) == output
     end
+
+    test "it doesn't crash on a lost end token" do
+      Parser.parse("]")
+    end
+
+    test "it doesn't crash on a non-closed token" do
+      Parser.parse("$[spi")
+      Parser.parse("$[spin ")
+      Parser.parse("$[spin chocolatine")
+    end
   end
 
   describe "multiple element input" do

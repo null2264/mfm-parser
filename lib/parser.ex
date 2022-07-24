@@ -14,7 +14,14 @@ defmodule MfmParser.Parser do
         else
           case token do
             %Token.MFM.Open{} ->
-              {children, rest} = parse(rest, [], &is_mfm_close_token?/1)
+              {children, rest} =
+                case parse(rest, [], &is_mfm_close_token?/1) do
+                  {children, rest} ->
+                    {children, rest}
+
+                  _ ->
+                    {[], rest}
+                end
 
               parse(
                 rest,
@@ -33,6 +40,13 @@ defmodule MfmParser.Parser do
               parse(
                 rest,
                 tree ++ [%Node.Newline{props: %{text: token.content}}],
+                is_end_token
+              )
+
+            %Token.MFM.Close{} ->
+              parse(
+                rest,
+                tree ++ [%Node.Text{props: %{text: token.content}}],
                 is_end_token
               )
           end
