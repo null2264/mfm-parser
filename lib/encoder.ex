@@ -108,18 +108,28 @@ defmodule MfmParser.Encoder do
         %Node.MFM.Spin{} ->
           {html_child, styles_child} = to_html_styles(node.children)
 
-          stylemap = %{
-            "mfm-spin" =>
-              "@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}",
-            "mfm-spinX" =>
+          styles_map = %{
+            "x" =>
               "@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}",
-            "mfm-spinY" =>
-              "@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}"
+            "y" =>
+              "@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}",
+            "z" =>
+              "@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}"
+          }
+
+          keyframe_names_map = %{
+            "x" => "mfm-spinX",
+            "y" => "mfm-spinY",
+            "z" => "mfm-spin"
+          }
+
+          directions_map = %{
+            "left" => "reverse"
           }
 
           {html <>
-             "<span style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{node.props.direction} none running #{node.props.keyframes_name};\">#{html_child}</span>",
-           styles ++ [Map.get(stylemap, node.props.keyframes_name, "")] ++ styles_child}
+             "<span style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{Map.get(directions_map, node.props.direction, node.props.direction)} none running #{Map.get(keyframe_names_map, node.props.axis, "")};\">#{html_child}</span>",
+           styles ++ [Map.get(styles_map, node.props.axis, "")] ++ styles_child}
 
         %Node.MFM.Shake{} ->
           {html_child, styles_child} = to_html_styles(node.children)

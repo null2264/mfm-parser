@@ -244,7 +244,7 @@ defmodule MfmParser.ParserTest do
       output_default = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spin",
+            axis: "z",
             direction: "normal",
             speed: "1.5s"
           },
@@ -257,8 +257,8 @@ defmodule MfmParser.ParserTest do
       output_left = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spin",
-            direction: "reverse",
+            axis: "z",
+            direction: "left",
             speed: "1.5s"
           },
           children: []
@@ -270,7 +270,7 @@ defmodule MfmParser.ParserTest do
       output_alternate = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spin",
+            axis: "z",
             direction: "alternate",
             speed: "1.5s"
           },
@@ -283,7 +283,7 @@ defmodule MfmParser.ParserTest do
       output_x = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinX",
+            axis: "x",
             direction: "normal",
             speed: "1.5s"
           },
@@ -296,8 +296,8 @@ defmodule MfmParser.ParserTest do
       output_x_left = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinX",
-            direction: "reverse",
+            axis: "x",
+            direction: "left",
             speed: "1.5s"
           },
           children: []
@@ -309,7 +309,7 @@ defmodule MfmParser.ParserTest do
       output_x_alternate = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinX",
+            axis: "x",
             direction: "alternate",
             speed: "1.5s"
           },
@@ -322,7 +322,7 @@ defmodule MfmParser.ParserTest do
       output_y = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinY",
+            axis: "y",
             direction: "normal",
             speed: "1.5s"
           },
@@ -335,8 +335,8 @@ defmodule MfmParser.ParserTest do
       output_y_left = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinY",
-            direction: "reverse",
+            axis: "y",
+            direction: "left",
             speed: "1.5s"
           },
           children: []
@@ -348,7 +348,7 @@ defmodule MfmParser.ParserTest do
       output_y_alternate = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spinY",
+            axis: "y",
             direction: "alternate",
             speed: "1.5s"
           },
@@ -361,7 +361,7 @@ defmodule MfmParser.ParserTest do
       output_speed = [
         %MfmParser.Node.MFM.Spin{
           props: %{
-            keyframes_name: "mfm-spin",
+            axis: "z",
             direction: "normal",
             speed: "20s"
           },
@@ -544,7 +544,7 @@ defmodule MfmParser.ParserTest do
                  children: [
                    %MfmParser.Node.MFM.Spin{
                      children: [%MfmParser.Node.Text{props: %{text: "chocolatine"}}],
-                     props: %{direction: "normal", keyframes_name: "mfm-spin", speed: "1.5s"}
+                     props: %{direction: "normal", axis: "z", speed: "1.5s"}
                    }
                  ],
                  props: %{speed: "0.5s"}
@@ -568,7 +568,7 @@ defmodule MfmParser.ParserTest do
                  children: [
                    %MfmParser.Node.MFM.Spin{
                      children: [%MfmParser.Node.Text{props: %{text: "pain"}}],
-                     props: %{direction: "normal", keyframes_name: "mfm-spin", speed: "1.5s"}
+                     props: %{direction: "normal", axis: "z", speed: "1.5s"}
                    },
                    %MfmParser.Node.Text{props: %{text: " "}},
                    %MfmParser.Node.MFM.Rainbow{

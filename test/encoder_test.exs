@@ -149,107 +149,107 @@ defmodule MfmParser.EncoderTest do
     end
 
     test "it handles spin" do
-      input_tree_spin_reverse = [
+      input_tree_z_left = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spin", direction: "reverse", speed: "1.5s"},
+          props: %{axis: "z", direction: "left", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spinx_reverse = [
+      input_tree_x_left = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinX", direction: "reverse", speed: "1.5s"},
+          props: %{axis: "x", direction: "left", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spiny_reverse = [
+      input_tree_y_left = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinY", direction: "reverse", speed: "1.5s"},
+          props: %{axis: "y", direction: "left", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spin_alternate = [
+      input_tree_z_alternate = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spin", direction: "alternate", speed: "1.5s"},
+          props: %{axis: "z", direction: "alternate", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spinx_alternate = [
+      input_tree_x_alternate = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinX", direction: "alternate", speed: "1.5s"},
+          props: %{axis: "x", direction: "alternate", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spiny_alternate = [
+      input_tree_y_alternate = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinY", direction: "alternate", speed: "1.5s"},
+          props: %{axis: "y", direction: "alternate", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spin_normal = [
+      input_tree_z_normal = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spin", direction: "normal", speed: "1.5s"},
+          props: %{axis: "z", direction: "normal", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spinx_normal = [
+      input_tree_x_normal = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinX", direction: "normal", speed: "1.5s"},
+          props: %{axis: "x", direction: "normal", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      input_tree_spiny_normal = [
+      input_tree_y_normal = [
         %Node.MFM.Spin{
-          props: %{keyframes_name: "mfm-spinY", direction: "normal", speed: "1.5s"},
+          props: %{axis: "y", direction: "normal", speed: "1.5s"},
           children: [%Node.Text{props: %{text: "🍮"}}]
         }
       ]
 
-      expected_tree_spin_reverse =
+      expected_tree_z_left =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
 
-      expected_tree_spinx_reverse =
+      expected_tree_x_left =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
 
-      expected_tree_spiny_reverse =
+      expected_tree_y_left =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
 
-      expected_tree_spin_alternate =
+      expected_tree_z_alternate =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
 
-      expected_tree_spinx_alternate =
+      expected_tree_x_alternate =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
 
-      expected_tree_spiny_alternate =
+      expected_tree_y_alternate =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
 
-      expected_tree_spin_normal =
+      expected_tree_z_normal =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
 
-      expected_tree_spinx_normal =
+      expected_tree_x_normal =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
 
-      expected_tree_spiny_normal =
+      expected_tree_y_normal =
         ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
 
-      assert Encoder.to_html(input_tree_spin_reverse) == expected_tree_spin_reverse
-      assert Encoder.to_html(input_tree_spinx_reverse) == expected_tree_spinx_reverse
-      assert Encoder.to_html(input_tree_spiny_reverse) == expected_tree_spiny_reverse
+      assert Encoder.to_html(input_tree_z_left) == expected_tree_z_left
+      assert Encoder.to_html(input_tree_x_left) == expected_tree_x_left
+      assert Encoder.to_html(input_tree_y_left) == expected_tree_y_left
 
-      assert Encoder.to_html(input_tree_spin_alternate) == expected_tree_spin_alternate
-      assert Encoder.to_html(input_tree_spinx_alternate) == expected_tree_spinx_alternate
-      assert Encoder.to_html(input_tree_spiny_alternate) == expected_tree_spiny_alternate
+      assert Encoder.to_html(input_tree_z_alternate) == expected_tree_z_alternate
+      assert Encoder.to_html(input_tree_x_alternate) == expected_tree_x_alternate
+      assert Encoder.to_html(input_tree_y_alternate) == expected_tree_y_alternate
 
-      assert Encoder.to_html(input_tree_spin_normal) == expected_tree_spin_normal
-      assert Encoder.to_html(input_tree_spinx_normal) == expected_tree_spinx_normal
-      assert Encoder.to_html(input_tree_spiny_normal) == expected_tree_spiny_normal
+      assert Encoder.to_html(input_tree_z_normal) == expected_tree_z_normal
+      assert Encoder.to_html(input_tree_x_normal) == expected_tree_x_normal
+      assert Encoder.to_html(input_tree_y_normal) == expected_tree_y_normal
     end
 
     test "it handles shake" do
@@ -395,7 +395,7 @@ defmodule MfmParser.EncoderTest do
           children: [
             %MfmParser.Node.MFM.Spin{
               children: [%MfmParser.Node.Text{props: %{text: "pain"}}],
-              props: %{direction: "normal", keyframes_name: "mfm-spin", speed: "1s"}
+              props: %{direction: "normal", axis: "z", speed: "1s"}
             },
             %MfmParser.Node.Text{props: %{text: " "}},
             %MfmParser.Node.MFM.Rainbow{
