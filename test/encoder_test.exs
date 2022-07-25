@@ -4,6 +4,8 @@ defmodule MfmParser.EncoderTest do
   alias MfmParser.Encoder
   alias MfmParser.Node
 
+  doctest MfmParser.Encoder
+
   describe "to_html" do
     test "it handles text" do
       input_tree = [%Node.Text{props: %{text: "chocolatine"}}]

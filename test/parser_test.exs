@@ -2,6 +2,8 @@ defmodule MfmParser.ParserTest do
   use ExUnit.Case
   alias MfmParser.Parser
 
+  doctest MfmParser.Parser
+
   describe "single element input" do
     test "it can handle an empty string as input" do
       input = ""
@@ -584,6 +586,37 @@ defmodule MfmParser.ParserTest do
                  props: %{size: "600%"}
                }
              ]
+    end
+  end
+
+  describe "to_props/1" do
+    test "it returns speed in the list of parameters" do
+      assert %{speed: "5s"} = Parser.to_props("$[blabla.speed=5s")
+      assert %{speed: "0.5s"} = Parser.to_props("$[blabla.speed=0.5s")
+    end
+
+    test "it returns v and h in the list of parameters" do
+      assert %{v: true} = Parser.to_props("$[blabla.v")
+      assert %{v: true, h: true} = Parser.to_props("$[blabla.h,v")
+    end
+
+    test "it returns fonts" do
+      assert %{font: "some_font"} = Parser.to_props("$[font.some_font")
+    end
+
+    test "it returns a size for an x element" do
+      assert %{size: "200%"} = Parser.to_props("$[x2")
+      assert %{size: "400%"} = Parser.to_props("$[x3")
+      assert %{size: "600%"} = Parser.to_props("$[x4")
+      assert %{size: "100%"} = Parser.to_props("$[xqsdfqsf")
+    end
+
+    test "it returns an empty list when there are no parameters" do
+      assert %{} = Parser.to_props("$[blabla")
+    end
+
+    test "it ignores unknown parameters" do
+      assert %{} = Parser.to_props("$[blabla.idk")
     end
   end
 end
