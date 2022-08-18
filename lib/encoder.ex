@@ -103,7 +103,7 @@ defmodule MfmParser.Encoder do
           {html_child, styles_child} = to_html_styles(node.children)
 
           {html <>
-             "<span style=\"display: inline-block; font-size: 150%; animation: #{node.props.speed} linear 0s infinite normal both running tada;\">#{html_child}</span>",
+             "<span style=\"display: inline-block; font-size: 150%; animation: #{node.props.speed} linear 0s infinite normal both running mfm-tada;\">#{html_child}</span>",
            styles ++
              [
                "@keyframes tada { 0% { transform: scaleZ(1); } 10%, 20% { transform: scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg); } 30%, 50%, 70%, 90% { transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg); } 40%, 60%, 80% { transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg); } 100% { transform: scaleZ(1); }}"

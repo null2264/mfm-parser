@@ -118,7 +118,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running tada;">🍮</span>]
+        ~s[<span style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running mfm-tada;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
