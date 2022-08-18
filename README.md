@@ -1,3 +1,7 @@
+# Akkoma-MFMParser
+
+extremely simple modification to [the original parser](https://codeberg.org/ilja/mfm_parser) that just doesn't include the CSS
+
 # MfmParser
 
 A simple parser for [Misskey Flavoured Markdown](https://github.com/misskey-dev/mfm.js/).

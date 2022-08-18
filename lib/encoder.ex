@@ -20,16 +20,16 @@ defmodule MfmParser.Encoder do
       ...>   }
       ...> ]
       ...> |> MfmParser.Encoder.to_html()
-      "<span style=\\"display: inline-block; animation: 5s ease 0s infinite normal none running mfm-twitch;\\">🍮</span><style>@keyframes mfm-twitch { 0% { transform:translate(7px,-2px) } 5% { transform:translate(-3px,1px) } 10% { transform:translate(-7px,-1px) } 15% { transform:translateY(-1px) } 20% { transform:translate(-8px,6px) } 25% { transform:translate(-4px,-3px) } 30% { transform:translate(-4px,-6px) } 35% { transform:translate(-8px,-8px) } 40% { transform:translate(4px,6px) } 45% { transform:translate(-3px,1px) } 50% { transform:translate(2px,-10px) } 55% { transform:translate(-7px) } 60% { transform:translate(-2px,4px) } 65% { transform:translate(3px,-8px) } 70% { transform:translate(6px,7px) } 75% { transform:translate(-7px,-2px) } 80% { transform:translate(-7px,-8px) } 85% { transform:translate(9px,3px) } 90% { transform:translate(-3px,-2px) } 95% { transform:translate(-10px,2px) } to { transform:translate(-2px,-6px) }}</style>"
+      "<span style=\\"display: inline-block; animation: 5s ease 0s infinite normal none running mfm-twitch;\\">🍮</span>"
 
       iex> MfmParser.Parser.parse("$[twitch.speed=5s 🍮]") |> MfmParser.Encoder.to_html()
-      "<span style=\\"display: inline-block; animation: 5s ease 0s infinite normal none running mfm-twitch;\\">🍮</span><style>@keyframes mfm-twitch { 0% { transform:translate(7px,-2px) } 5% { transform:translate(-3px,1px) } 10% { transform:translate(-7px,-1px) } 15% { transform:translateY(-1px) } 20% { transform:translate(-8px,6px) } 25% { transform:translate(-4px,-3px) } 30% { transform:translate(-4px,-6px) } 35% { transform:translate(-8px,-8px) } 40% { transform:translate(4px,6px) } 45% { transform:translate(-3px,1px) } 50% { transform:translate(2px,-10px) } 55% { transform:translate(-7px) } 60% { transform:translate(-2px,4px) } 65% { transform:translate(3px,-8px) } 70% { transform:translate(6px,7px) } 75% { transform:translate(-7px,-2px) } 80% { transform:translate(-7px,-8px) } 85% { transform:translate(9px,3px) } 90% { transform:translate(-3px,-2px) } 95% { transform:translate(-10px,2px) } to { transform:translate(-2px,-6px) }}</style>"
+      "<span style=\\"display: inline-block; animation: 5s ease 0s infinite normal none running mfm-twitch;\\">🍮</span>"
   """
 
   def to_html(tree) when is_list(tree) do
-    {html, styles} = to_html_styles(tree)
+    {html, _styles} = to_html_styles(tree)
 
-    html |> append_styles_when_not_empty(styles)
+    html
   end
 
   def to_html(input) when is_binary(input) do
@@ -213,15 +213,5 @@ defmodule MfmParser.Encoder do
           {html, styles}
       end
     end)
-  end
-
-  defp append_styles_when_not_empty(html, []) do
-    html
-  end
-
-  defp append_styles_when_not_empty(html, styles) do
-    styles = styles |> Enum.uniq() |> Enum.reduce("", fn style, acc -> style <> acc end)
-
-    html <> "<style>" <> styles <> "</style>"
   end
 end

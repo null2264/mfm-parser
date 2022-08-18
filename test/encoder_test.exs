@@ -92,8 +92,7 @@ defmodule MfmParser.EncoderTest do
         }
       ]
 
-      expected =
-        ~s[<span class="_mfm_blur_">Misskey expands the world of the Fediverse</span><style>._mfm_blur_ { filter: blur(6px); transition: filter .3s; } ._mfm_blur_:hover { filter: blur(0px); }</style>]
+      expected = ~s[<span class="_mfm_blur_">Misskey expands the world of the Fediverse</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -106,7 +105,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal both running mfm-rubberBand;">🍮</span><style>@keyframes mfm-rubberBand { 0% { transform:scaleZ(1) } 30% { transform:scale3d(1.25,.75,1) } 40% { transform:scale3d(.75,1.25,1) } 50% { transform:scale3d(1.15,.85,1) } 65% { transform:scale3d(.95,1.05,1) } 75% { transform:scale3d(1.05,.95,1) } to { transform:scaleZ(1) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal both running mfm-rubberBand;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -119,7 +118,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running tada;">🍮</span><style>@keyframes tada { 0% { transform: scaleZ(1); } 10%, 20% { transform: scale3d(.9,.9,.9) rotate3d(0,0,1,-3deg); } 30%, 50%, 70%, 90% { transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,3deg); } 40%, 60%, 80% { transform: scale3d(1.1,1.1,1.1) rotate3d(0,0,1,-3deg); } 100% { transform: scaleZ(1); }}</style>]
+        ~s[<span style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running tada;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -132,7 +131,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-jump;">🍮</span><style>@keyframes mfm-jump { 0% { transform:translateY(0) } 25% { transform:translateY(-16px) } 50% { transform:translateY(0) } 75% { transform:translateY(-8px) } to { transform:translateY(0) }}</style>]
+        ~s[<span style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-jump;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -145,7 +144,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;">🍮</span><style>@keyframes mfm-bounce { 0% { transform:translateY(0) scale(1) } 25% { transform:translateY(-16px) scale(1) }  50% { transform:translateY(0) scale(1) } 75% { transform:translateY(0) scale(1.5,.75) } to { transform:translateY(0) scale(1) }}</style>]
+        ~s[<span style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -215,31 +214,31 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected_tree_z_left =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spin;">🍮</span>]
 
       expected_tree_x_left =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_left =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinY;">🍮</span>]
 
       expected_tree_z_alternate =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spin;">🍮</span>]
 
       expected_tree_x_alternate =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_alternate =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinY;">🍮</span>]
 
       expected_tree_z_normal =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spin;">🍮</span><style>@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spin;">🍮</span>]
 
       expected_tree_x_normal =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinX;">🍮</span><style>@keyframes mfm-spinX { 0% { transform:perspective(128px) rotateX(0) } to { transform:perspective(128px) rotateX(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_normal =
-        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinY;">🍮</span><style>@keyframes mfm-spinY { 0% { transform:perspective(128px) rotateY(0) } to { transform:perspective(128px) rotateY(360deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinY;">🍮</span>]
 
       assert Encoder.to_html(input_tree_z_left) == expected_tree_z_left
       assert Encoder.to_html(input_tree_x_left) == expected_tree_x_left
@@ -262,7 +261,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 0.5s ease 0s infinite normal none running mfm-shake;">🍮</span><style>@keyframes mfm-shake { 0% { transform:translate(-3px,-1px) rotate(-8deg) } 5% { transform:translateY(-1px) rotate(-10deg) } 10% { transform:translate(1px,-3px) rotate(0) } 15% { transform:translate(1px,1px) rotate(11deg) } 20% { transform:translate(-2px,1px) rotate(1deg) } 25% { transform:translate(-1px,-2px) rotate(-2deg) } 30% { transform:translate(-1px,2px) rotate(-3deg) } 35% { transform:translate(2px,1px) rotate(6deg) } 40% { transform:translate(-2px,-3px) rotate(-9deg) } 45% { transform:translateY(-1px) rotate(-12deg) } 50% { transform:translate(1px,2px) rotate(10deg) } 55% { transform:translateY(-3px) rotate(8deg) } 60% { transform:translate(1px,-1px) rotate(8deg) } 65% { transform:translateY(-1px) rotate(-7deg) } 70% { transform:translate(-1px,-3px) rotate(6deg) } 75% { transform:translateY(-2px) rotate(4deg) } 80% { transform:translate(-2px,-1px) rotate(3deg) } 85% { transform:translate(1px,-3px) rotate(-10deg) } 90% { transform:translate(1px) rotate(3deg) } 95% { transform:translate(-2px) rotate(-3deg) } to { transform:translate(2px,1px) rotate(2deg) }}</style>]
+        ~s[<span style="display: inline-block; animation: 0.5s ease 0s infinite normal none running mfm-shake;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -275,7 +274,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 0.5s ease 0s infinite normal none running mfm-twitch;">🍮</span><style>@keyframes mfm-twitch { 0% { transform:translate(7px,-2px) } 5% { transform:translate(-3px,1px) } 10% { transform:translate(-7px,-1px) } 15% { transform:translateY(-1px) } 20% { transform:translate(-8px,6px) } 25% { transform:translate(-4px,-3px) } 30% { transform:translate(-4px,-6px) } 35% { transform:translate(-8px,-8px) } 40% { transform:translate(4px,6px) } 45% { transform:translate(-3px,1px) } 50% { transform:translate(2px,-10px) } 55% { transform:translate(-7px) } 60% { transform:translate(-2px,4px) } 65% { transform:translate(3px,-8px) } 70% { transform:translate(6px,7px) } 75% { transform:translate(-7px,-2px) } 80% { transform:translate(-7px,-8px) } 85% { transform:translate(9px,3px) } 90% { transform:translate(-3px,-2px) } 95% { transform:translate(-10px,2px) } to { transform:translate(-2px,-6px) }}</style>]
+        ~s[<span style="display: inline-block; animation: 0.5s ease 0s infinite normal none running mfm-twitch;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -288,7 +287,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-rainbow;">🍮</span><style>@keyframes mfm-rainbow { 0% { filter:hue-rotate(0deg) contrast(150%) saturate(150%) } to { filter:hue-rotate(360deg) contrast(150%) saturate(150%) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-rainbow;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -302,7 +301,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span><style>@keyframes mfm-sparkle { 0% { filter: brightness(100%) } to { filter: brightness(300%) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -379,7 +378,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span><span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span><style>@keyframes mfm-sparkle { 0% { filter: brightness(100%) } to { filter: brightness(300%) }}</style>]
+        ~s[<span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span><span style="display: inline-block; animation: 1s linear 0s infinite normal none running mfm-sparkle;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -415,7 +414,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        "It's not <span style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span><style>@keyframes mfm-jump { 0% { transform:translateY(0) } 25% { transform:translateY(-16px) } 50% { transform:translateY(0) } 75% { transform:translateY(-8px) } to { transform:translateY(0) }}@keyframes mfm-rainbow { 0% { filter:hue-rotate(0deg) contrast(150%) saturate(150%) } to { filter:hue-rotate(360deg) contrast(150%) saturate(150%) }}@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}@keyframes mfm-twitch { 0% { transform:translate(7px,-2px) } 5% { transform:translate(-3px,1px) } 10% { transform:translate(-7px,-1px) } 15% { transform:translateY(-1px) } 20% { transform:translate(-8px,6px) } 25% { transform:translate(-4px,-3px) } 30% { transform:translate(-4px,-6px) } 35% { transform:translate(-8px,-8px) } 40% { transform:translate(4px,6px) } 45% { transform:translate(-3px,1px) } 50% { transform:translate(2px,-10px) } 55% { transform:translate(-7px) } 60% { transform:translate(-2px,4px) } 65% { transform:translate(3px,-8px) } 70% { transform:translate(6px,7px) } 75% { transform:translate(-7px,-2px) } 80% { transform:translate(-7px,-8px) } 85% { transform:translate(9px,3px) } 90% { transform:translate(-3px,-2px) } 95% { transform:translate(-10px,2px) } to { transform:translate(-2px,-6px) }}</style>"
+        "It's not <span style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -425,7 +424,7 @@ defmodule MfmParser.EncoderTest do
         "It's not $[twitch.speed=0.2s chocolatine]\nit's $[x4 $[spin.speed=1s pain] $[rainbow.speed=2s au] $[jump.speed=0.5s chocolat]]"
 
       expected =
-        "It's not <span style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span><style>@keyframes mfm-jump { 0% { transform:translateY(0) } 25% { transform:translateY(-16px) } 50% { transform:translateY(0) } 75% { transform:translateY(-8px) } to { transform:translateY(0) }}@keyframes mfm-rainbow { 0% { filter:hue-rotate(0deg) contrast(150%) saturate(150%) } to { filter:hue-rotate(360deg) contrast(150%) saturate(150%) }}@keyframes mfm-spin { 0% { transform:rotate(0) } to { transform:rotate(360deg) }}@keyframes mfm-twitch { 0% { transform:translate(7px,-2px) } 5% { transform:translate(-3px,1px) } 10% { transform:translate(-7px,-1px) } 15% { transform:translateY(-1px) } 20% { transform:translate(-8px,6px) } 25% { transform:translate(-4px,-3px) } 30% { transform:translate(-4px,-6px) } 35% { transform:translate(-8px,-8px) } 40% { transform:translate(4px,6px) } 45% { transform:translate(-3px,1px) } 50% { transform:translate(2px,-10px) } 55% { transform:translate(-7px) } 60% { transform:translate(-2px,4px) } 65% { transform:translate(3px,-8px) } 70% { transform:translate(6px,7px) } 75% { transform:translate(-7px,-2px) } 80% { transform:translate(-7px,-8px) } 85% { transform:translate(9px,3px) } 90% { transform:translate(-3px,-2px) } 95% { transform:translate(-10px,2px) } to { transform:translate(-2px,-6px) }}</style>"
+        "It's not <span style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input) == expected
     end
