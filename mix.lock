@@ -1,0 +1,4 @@
+%{
+  "phoenix_view": {:hex, :phoenix_view, "1.1.2", "1b82764a065fb41051637872c7bd07ed2fdb6f5c3bd89684d4dca6e10115c95a", [:mix], [{:phoenix_html, "~> 2.14.2 or ~> 3.0", [hex: :phoenix_html, repo: "hexpm", optional: true]}], "hexpm", "7ae90ad27b09091266f6adbb61e1d2516a7c3d7062c6789d46a7554ec40f3a56"},
+  "temple": {:git, "git@akkoma.dev:floatingghost/temple.git", "066a699ade472d8fa42a9d730b29a61af9bc8b59", [ref: "066a699ade472d8fa42a9d730b29a61af9bc8b59"]},
+}

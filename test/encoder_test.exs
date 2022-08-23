@@ -80,7 +80,7 @@ defmodule MfmParser.EncoderTest do
         }
       ]
 
-      expected = ~s[<span font-size: "400%">🍮</span>]
+      expected = ~s[<span style="font-size: 400%">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -92,7 +92,7 @@ defmodule MfmParser.EncoderTest do
         }
       ]
 
-      expected = ~s[<span class="_mfm_blur_">Misskey expands the world of the Fediverse</span>]
+      expected = ~s[<span class="mfm _mfm_blur_">Misskey expands the world of the Fediverse</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -414,7 +414,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
+        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -424,7 +424,7 @@ defmodule MfmParser.EncoderTest do
         "It's not $[twitch.speed=0.2s chocolatine]\nit's $[x4 $[spin.speed=1s pain] $[rainbow.speed=2s au] $[jump.speed=0.5s chocolat]]"
 
       expected =
-        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span font-size: \"600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
+        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input) == expected
     end
