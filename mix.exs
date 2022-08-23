@@ -21,7 +21,7 @@ defmodule MfmParser.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:temple, git: "git@akkoma.dev:floatingghost/temple.git", ref: "066a699ade472d8fa42a9d730b29a61af9bc8b59"}
+      {:temple, git: "https://akkoma.dev/AkkomaGang/temple.git", ref: "066a699ade472d8fa42a9d730b29a61af9bc8b59"}
     ]
   end
 end
