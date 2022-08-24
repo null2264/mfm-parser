@@ -80,7 +80,7 @@ defmodule MfmParser.EncoderTest do
         }
       ]
 
-      expected = ~s[<span style="font-size: 400%">🍮</span>]
+      expected = ~s[<span style="font-size: 400%" class="mfm _mfm_x3_">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -105,7 +105,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1s linear 0s infinite normal both running mfm-rubberBand;">🍮</span>]
+        ~s[<span class="mfm _mfm_jelly_" style="display: inline-block; animation: 1s linear 0s infinite normal both running mfm-rubberBand;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -118,7 +118,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span class="mfm" style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running mfm-tada;">🍮</span>]
+        ~s[<span class="mfm _mfm_tada_" style="display: inline-block; font-size: 150%; animation: 1s linear 0s infinite normal both running mfm-tada;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -131,7 +131,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span class="mfm" style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-jump;">🍮</span>]
+        ~s[<span class="mfm _mfm_jump_" style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-jump;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -144,7 +144,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        ~s[<span class="mfm" style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;">🍮</span>]
+        ~s[<span class="mfm _mfm_bounce_" style="display: inline-block; animation: 0.75s linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;">🍮</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -214,31 +214,31 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected_tree_z_left =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spin;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spin;">🍮</span>]
 
       expected_tree_x_left =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinX;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_left =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinY;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite reverse none running mfm-spinY;">🍮</span>]
 
       expected_tree_z_alternate =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spin;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spin;">🍮</span>]
 
       expected_tree_x_alternate =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinX;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_alternate =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinY;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite alternate none running mfm-spinY;">🍮</span>]
 
       expected_tree_z_normal =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spin;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spin;">🍮</span>]
 
       expected_tree_x_normal =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinX;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinX;">🍮</span>]
 
       expected_tree_y_normal =
-        ~s[<span class="mfm" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinY;">🍮</span>]
+        ~s[<span class="mfm _mfm_spin_" style="display: inline-block; animation: 1.5s linear 0s infinite normal none running mfm-spinY;">🍮</span>]
 
       assert Encoder.to_html(input_tree_z_left) == expected_tree_z_left
       assert Encoder.to_html(input_tree_x_left) == expected_tree_x_left
@@ -414,7 +414,7 @@ defmodule MfmParser.EncoderTest do
       ]
 
       expected =
-        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
+        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\" class=\"mfm _mfm_x4_\"><span class=\"mfm _mfm_spin_\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm _mfm_jump_\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input_tree) == expected
     end
@@ -424,7 +424,7 @@ defmodule MfmParser.EncoderTest do
         "It's not $[twitch.speed=0.2s chocolatine]\nit's $[x4 $[spin.speed=1s pain] $[rainbow.speed=2s au] $[jump.speed=0.5s chocolat]]"
 
       expected =
-        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\"><span class=\"mfm\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
+        "It's not <span class=\"mfm\" style=\"display: inline-block; animation: 0.2s ease 0s infinite normal none running mfm-twitch;\">chocolatine</span>\nit's <span style=\"font-size: 600%\" class=\"mfm _mfm_x4_\"><span class=\"mfm _mfm_spin_\" style=\"display: inline-block; animation: 1s linear 0s infinite normal none running mfm-spin;\">pain</span> <span class=\"mfm\" style=\"display: inline-block; animation: 2s linear 0s infinite normal none running mfm-rainbow;\">au</span> <span class=\"mfm _mfm_jump_\" style=\"display: inline-block; animation: 0.5s linear 0s infinite normal none running mfm-jump;\">chocolat</span></span>"
 
       assert Encoder.to_html(input) == expected
     end

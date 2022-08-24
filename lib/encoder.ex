@@ -76,9 +76,10 @@ defmodule MfmParser.Encoder do
 
           %Node.MFM.X{} ->
             html_child = to_html_styles(node.children)
+            prop_map = %{"200%" => "2", "400%" => "3", "600%" => "4"}
 
             temple do
-              span style: "font-size: #{node.props.size}" do
+              span style: "font-size: #{node.props.size}", class: "mfm _mfm_x#{prop_map[node.props.size]}_" do
                 html_child
               end
             end
@@ -93,13 +94,13 @@ defmodule MfmParser.Encoder do
           %Node.MFM.Jelly{} ->
             html_child = to_html_styles(node.children)
 
-            "<span class=\"mfm\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal both running mfm-rubberBand;\">#{html_child}</span>"
+            "<span class=\"mfm _mfm_jelly_\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal both running mfm-rubberBand;\">#{html_child}</span>"
 
           %Node.MFM.Tada{} ->
             html_child = to_html_styles(node.children)
 
             temple do
-              span class: "mfm",
+              span class: "mfm _mfm_tada_",
                    style:
                      "display: inline-block; font-size: 150%; animation: #{node.props.speed} linear 0s infinite normal both running mfm-tada;" do
                 html_child
@@ -109,12 +110,12 @@ defmodule MfmParser.Encoder do
           %Node.MFM.Jump{} ->
             html_child = to_html_styles(node.children)
 
-            "<span class=\"mfm\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal none running mfm-jump;\">#{html_child}</span>"
+            "<span class=\"mfm _mfm_jump_\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal none running mfm-jump;\">#{html_child}</span>"
 
           %Node.MFM.Bounce{} ->
             html_child = to_html_styles(node.children)
 
-            "<span class=\"mfm\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;\">#{html_child}</span>"
+            "<span class=\"mfm _mfm_bounce_\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite normal none running mfm-bounce; transform-origin: center bottom 0px;\">#{html_child}</span>"
 
           %Node.MFM.Spin{} ->
             html_child = to_html_styles(node.children)
@@ -129,7 +130,7 @@ defmodule MfmParser.Encoder do
               "left" => "reverse"
             }
 
-            "<span class=\"mfm\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{Map.get(directions_map, node.props.direction, node.props.direction)} none running #{Map.get(keyframe_names_map, node.props.axis, "")};\">#{html_child}</span>"
+            "<span class=\"mfm _mfm_spin_\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{Map.get(directions_map, node.props.direction, node.props.direction)} none running #{Map.get(keyframe_names_map, node.props.axis, "")};\">#{html_child}</span>"
 
           %Node.MFM.Shake{} ->
             html_child = to_html_styles(node.children)
