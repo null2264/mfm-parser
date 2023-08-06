@@ -92,7 +92,7 @@ defmodule MfmParser.EncoderTest do
         }
       ]
 
-      expected = ~s[<span class="mfm _mfm_blur_">Misskey expands the world of the Fediverse</span>]
+      expected = ~s[<span class="_mfm_blur_">Misskey expands the world of the Fediverse</span>]
 
       assert Encoder.to_html(input_tree) == expected
     end

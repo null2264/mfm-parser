@@ -4,7 +4,7 @@ defmodule MfmParser.MixProject do
   def project do
     [
       app: :mfm_parser,
-      version: "0.1.1",
+      version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -20,8 +20,6 @@ defmodule MfmParser.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [
-      {:temple, git: "https://akkoma.dev/AkkomaGang/temple.git", ref: "066a699ade472d8fa42a9d730b29a61af9bc8b59"}
-    ]
+    []
   end
 end
