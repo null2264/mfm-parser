@@ -84,7 +84,7 @@ defmodule MfmParser.Encoder do
         %Node.MFM.Blur{} ->
           {html_child, styles_child} = to_html_styles(node.children)
 
-          {html <> "<span class=\"_mfm_blur_\">#{html_child}</span>",
+          {html <> "<span class=\"mfm _mfm_blur_\">#{html_child}</span>",
            styles ++
              [
                "._mfm_blur_ { filter: blur(6px); transition: filter .3s; } ._mfm_blur_:hover { filter: blur(0px); }"
