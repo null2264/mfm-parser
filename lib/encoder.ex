@@ -3,13 +3,13 @@ defmodule MfmParser.Encoder do
   alias MfmParser.Node
 
   @moduledoc """
-  An encoder who can turn a tree into HTML. 
+  An encoder who can turn a tree into HTML.
 
-  It only works for the MFM specific tags of the form $[name.opts content]. 
+  It only works for the MFM specific tags of the form $[name.opts content].
 
-  Other parts of MFM (html, Markdown and [KaTeX](https://katex.org/)) are out of scope for this project. 
+  Other parts of MFM (html, Markdown and [KaTeX](https://katex.org/)) are out of scope for this project.
 
-  It can directly take input from function `MfmParser.Parser.parse`. 
+  It can directly take input from function `MfmParser.Parser.parse`.
 
   ## Examples
 
@@ -52,17 +52,17 @@ defmodule MfmParser.Encoder do
           case node.props do
             %{v: true, h: true} ->
               {html <>
-                 "<span class=\"mfm\" style=\"display: inline-block; transform: scale(-1);\">#{html_child}</span>",
+                 "<span class=\"mfm _mfm_flip_\" style=\"display: inline-block; transform: scale(-1);\">#{html_child}</span>",
                styles}
 
             %{v: true} ->
               {html <>
-                 "<span class=\"mfm\" style=\"display: inline-block; transform: scaleY(-1);\">#{html_child}</span>",
+                 "<span class=\"mfm _mfm_flipV_\" style=\"display: inline-block; transform: scaleY(-1);\">#{html_child}</span>",
                styles}
 
             _ ->
               {html <>
-                 "<span class=\"mfm\" style=\"display: inline-block; transform: scaleX(-1);\">#{html_child}</span>",
+                 "<span class=\"mfm _mfm_flipH_\" style=\"display: inline-block; transform: scaleX(-1);\">#{html_child}</span>",
                styles ++ styles_child}
           end
 
@@ -128,12 +128,18 @@ defmodule MfmParser.Encoder do
             "y" => "mfm-spinY",
             "z" => "mfm-spin"
           }
+
+          classes_map = %{
+            "x" => "_mfm_spinX_",
+            "y" => "_mfm_spinY_"
+          }
+
           directions_map = %{
               "left" => "reverse"
           }
 
           {html <>
-             "<span class=\"mfm _mfm_spin_\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{Map.get(directions_map, node.props.direction, node.props.direction)} none running #{Map.get(keyframe_names_map, node.props.axis, "")};\">#{html_child}</span>",
+             "<span class=\"mfm #{Map.get(classes_map, node.props.axis, "_mfm_spin_")}\" style=\"display: inline-block; animation: #{node.props.speed} linear 0s infinite #{Map.get(directions_map, node.props.direction, node.props.direction)} none running #{Map.get(keyframe_names_map, node.props.axis, "")};\">#{html_child}</span>",
            styles ++ [Map.get(styles_map, node.props.axis, "")] ++ styles_child}
 
         %Node.MFM.Shake{} ->
