@@ -4,13 +4,13 @@ defmodule MfmParser.Parser do
   alias MfmParser.Lexer
 
   @moduledoc """
-  `MfmParser` is a parser for [Misskey Flavoured Markdown](https://mk.nixnet.social/mfm-cheat-sheet). 
+  `MfmParser` is a parser for [Misskey Flavoured Markdown](https://mk.nixnet.social/mfm-cheat-sheet).
 
-  It can parse MFM and return a tree. It also has an encoder who can turn a tree into HTML. 
+  It can parse MFM and return a tree. It also has an encoder who can turn a tree into HTML.
 
-  It only works for the MFM specific tags of the form $[name.opts content]. 
+  It only works for the MFM specific tags of the form $[name.opts content].
 
-  Other parts of MFM (html, Markdown and [KaTeX](https://katex.org/)) are out of scope for this project. 
+  Other parts of MFM (html, Markdown and [KaTeX](https://katex.org/)) are out of scope for this project.
 
   ## Examples
 
@@ -97,6 +97,7 @@ defmodule MfmParser.Parser do
       content =~ "$[rainbow" -> %Node.MFM.Rainbow{}
       content =~ "$[sparkle" -> %Node.MFM.Sparkle{}
       content =~ "$[rotate" -> %Node.MFM.Rotate{}
+      content =~ "$[center" -> %Node.MFM.Center{}
       true -> %Node.MFM.Undefined{}
     end
     |> fill_props(token)
